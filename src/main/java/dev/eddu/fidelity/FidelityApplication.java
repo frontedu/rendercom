@@ -16,8 +16,10 @@ public class FidelityApplication {
 class Controller{
 	@GetMapping("/")
 	private String index(){
-		return "Hello World";
+		return "Hello!";
 	}
+
+
 }
 
 }
