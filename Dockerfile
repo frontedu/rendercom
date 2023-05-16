@@ -1,15 +1,5 @@
-FROM ubuntu:latest AS build
-
-RUN apt-get update && apt-get install -y maven
-RUN apt-get install openjdk-17-jdk -y
-COPY . .
-
-RUN mvn clean package -DskipTests
-
-FROM openjdk:17-jdk-slim
-
+FROM eclipse-temurin:17-jdk-alpine
+VOLUME /tmp
+COPY target/*.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
 EXPOSE 8080
-
-COPY --from=build /build/libs/fidelity-2.jar app.jar
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
